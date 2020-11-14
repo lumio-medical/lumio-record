@@ -36,7 +36,7 @@ public class SourcingDeserializer extends StdDeserializer<Sourcing>
     @Override
     public Sourcing deserialize(JsonParser p, DeserializationContext ctx) throws IOException
     {
-        var currentValue = p.getParsingContext().getParent().getCurrentValue();
+        var currentValue = p.getParsingContext().getCurrentValue();
         SourceSet sourceSet = SourceRegister.forType(currentValue.getClass());
         Sourcing sourcing = new Sourcing();
 

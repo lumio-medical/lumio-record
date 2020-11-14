@@ -1,5 +1,6 @@
 package com.lumiomedical.record.source;
 
+import com.lumiomedical.record.model.MySource;
 import com.lumiomedical.record.source.register.IndexedSource;
 
 /**
@@ -11,4 +12,5 @@ public interface Sources
 {
     SourceSetA A = new SourceSetA();
     SourceSetB B = new SourceSetB();
+    MySource MySource = new MySource();
 }
