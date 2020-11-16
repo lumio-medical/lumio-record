@@ -124,6 +124,7 @@ public class PatientFactory implements Factory<BasicDBObject, Patient>
         var patient = new Patient();
         patient.firstName = input.getString("first_name");
         patient.lastName = input.getString("last_name");
+        patient.birthDate = DBObjects.getInstantOrNull(input, "birth_date");
         return patient;
     }
 
@@ -132,12 +133,15 @@ public class PatientFactory implements Factory<BasicDBObject, Patient>
     {
         /* This bit is responsible for the transcription of a Patient POJO into a MongoDB document */
         return new BasicDBObject()
-            .append("first_name", input.getFirstName())
-            .append("last_name", input.getLastName())
+            .append("first_name", input.firstName)
+            .append("last_name", input.lastName)
+            .append("birth_date", input.birthDate)
         ;
     }
 }
 ```
+
+There are more efficient ways to do that but for the time being let's stick to basic.
 
 We have everything now, so let's do a few requests:
 
@@ -159,9 +163,9 @@ patient.firstName = "Bernard";
 store.put(patient, Referential.at(Instant.parse("2020-01-01T00:00:00.00Z")));
 
 /* This should print Bernard */
-System.out.println(store.find(patient.getUid()).getName());
+System.out.println(store.find(patient.getUid()).firstName);
 /* This should print Arnold */
-System.out.println(store.find(patient.getUid(), Referential.at(Instant.parse("2010-01-01T00:00:00.00Z"))).getName());
+System.out.println(store.find(patient.getUid(), Referential.at(Instant.parse("2010-01-01T00:00:00.00Z"))).firstName);
 ```
 
 _TODO_
