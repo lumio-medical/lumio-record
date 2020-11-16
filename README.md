@@ -49,7 +49,7 @@ patient = patientStore.find(someUid);
 patient = patientStore.find(someUid, Referential.now());
 
 /* ..this time we want an earlier version */
-patient = patientStore.find(someUid, Referential.at(TimeHelper.inDays(-10)));
+patient = patientStore.find(someUid, Referential.at(inDays(-10)));
 
 List<Patient> records;
 /* find all records for the patient with this unique identifier */
@@ -58,13 +58,13 @@ records = patientStore.list(List.of(someUid), Referential.any());
 /* ..this time we only want versions from a given timeframe */
 records = patientStore.list(
     List.of(someUid),
-    Referential.between(TimeHelper.inDays(-60), TimeHelper.inDays(-30))
+    Referential.between(inDays(-60), inDays(-30))
 );
 
 /* insert a record version at the present time */
 patientStore.put(patient);
 /* ..or at a given date */
-patientStore.put(patient, Referential.at(TimeHelper.inDays(-15)));
+patientStore.put(patient, Referential.at(inDays(-15)));
 ```
 
 Now, let's look a bit closer at what it looks like when creating a `Record` entity and its store. 
