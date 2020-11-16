@@ -142,12 +142,12 @@ public class PatientFactory implements Factory<BasicDBObject, Patient>
 We have everything now, so let's do a few requests:
 
 ```java
+PatientStore store = new MongoDBPatientStore(new MongoDBClient("my_db", "localhost", 27017), new PatientFactory());
+
 var patient = new Patient();
 patient.firstName = "Arnold";
 patient.lastName = "Weber";
 patient.birthDate = Instant.parse("2001-01-01T00:00:00.00Z");
-
-var store = new PatientStore(new MongoDBClient(), new PatientFactory());
 
 /* Let's insert it at his birthdate */
 store.put(patient, Referential.at(patient.birthDate));

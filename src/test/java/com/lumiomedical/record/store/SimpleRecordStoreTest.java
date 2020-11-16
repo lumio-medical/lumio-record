@@ -248,27 +248,6 @@ public class SimpleRecordStoreTest
     }
 
     @Test
-    void test()
-    {
-        var patient = provideRecord();
-        patient.setName("Arnold");
-
-        /* Let's insert it at his birthdate */
-        store.put(patient, Referential.at(Instant.parse("2001-01-01T00:00:00.00Z")));
-
-        /* Let's change his first name */
-        patient.setName("Bernard");
-
-        /* Let's insert this some time later */
-        store.put(patient, Referential.at(Instant.parse("2020-01-01T00:00:00.00Z")));
-
-        /* This should print Bernard */
-        System.out.println(store.find(patient.getUid()).getName());
-        /* This should print Arnold */
-        System.out.println(store.find(patient.getUid(), Referential.at(Instant.parse("2010-01-01T00:00:00.00Z"))).getName());
-    }
-
-    @Test
     void testInsertBetween()
     {
         /*
