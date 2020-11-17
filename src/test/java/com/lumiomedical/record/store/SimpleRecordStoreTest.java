@@ -427,6 +427,39 @@ public class SimpleRecordStoreTest
         Assertions.assertEquals(dbR1f.getValidityEnd(), dbR8.getValidityStart());
     }
 
+    @Test
+    void testRemove()
+    {
+        /* We persist a first record, then modify it and persist again */
+        var r1 = provideRecord();
+        this.store.put(r1);
+
+        r1.setName("Meh");
+        this.store.put(r1);
+
+        /* We persist second record, then modify it and persist again */
+        var r2 = provideRecord().setAge(12L);
+        this.store.put(r2);
+
+        r2.setAge(20L);
+        this.store.put(r2);
+
+        /* We should have 2 records, each with 2 versions */
+        Assertions.assertEquals(2, this.store.count());
+        Assertions.assertEquals(4, this.store.count(Referential.any()));
+
+        this.store.remove(new Query("uid", r1.getUid()));
+
+        /* We should have 1 record with 2 versions */
+        Assertions.assertEquals(2, this.store.count(Referential.any()));
+
+        var dbR2 = this.store.find(r2.getUid());
+        this.store.remove(dbR2.getId());
+
+        /* We should have 1 record with 1 version */
+        Assertions.assertEquals(1, this.store.count(Referential.any()));
+    }
+
     /**
      *
      */
