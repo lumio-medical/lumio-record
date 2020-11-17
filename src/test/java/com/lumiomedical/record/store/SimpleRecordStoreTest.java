@@ -109,7 +109,7 @@ public class SimpleRecordStoreTest
         var r1Start = daysAgo(6);
         this.store.put(r1, Referential.at(r1Start));
 
-        var dbR1a = this.store.find(new Query("uid", r1.getUid()));
+        var dbR1a = this.store.find(r1.getUid());
 
         Assertions.assertEquals(1, this.store.count(Referential.any()));
         Assertions.assertEquals(1, this.store.count(Referential.now()));
@@ -126,7 +126,7 @@ public class SimpleRecordStoreTest
         var r2Start = daysAgo(2);
         this.store.put(r2, Referential.at(r2Start));
 
-        var dbR1b = this.store.find(new Query("uid", r1.getUid()));
+        var dbR1b = this.store.find(r1.getUid());
 
         Assertions.assertEquals(1, this.store.count(Referential.any()));
         Assertions.assertEquals(1, this.store.count(Referential.now()));
@@ -143,7 +143,7 @@ public class SimpleRecordStoreTest
         var r3Start = daysAgo(7);
         this.store.put(r3, Referential.at(r3Start));
 
-        var dbR1c = this.store.find(new Query("uid", r1.getUid()));
+        var dbR1c = this.store.find(r1.getUid());
 
         Assertions.assertEquals(1, this.store.count(Referential.any()));
         Assertions.assertEquals(1, this.store.count(Referential.now()));
@@ -162,8 +162,8 @@ public class SimpleRecordStoreTest
         var r4Start = daysAgo(5);
         this.store.put(r4, Referential.at(r4Start));
 
-        var dbR1d = this.store.find(new Query("uid", r1.getUid()), Referential.at(daysAgo(6)));
-        var dbR4a = this.store.find(new Query("uid", r4.getUid()));
+        var dbR1d = this.store.find(r1.getUid(), Referential.at(daysAgo(6)));
+        var dbR4a = this.store.find(r4.getUid());
 
         Assertions.assertEquals(2, this.store.count(Referential.any()));
         Assertions.assertEquals(1, this.store.count(Referential.now()));
@@ -181,8 +181,8 @@ public class SimpleRecordStoreTest
         var r5Start = daysAgo(3);
         this.store.put(r5, Referential.at(r5Start));
 
-        var dbR4b = this.store.find(new Query("uid", r4.getUid()), Referential.at(daysAgo(4)));
-        var dbR5a = this.store.find(new Query("uid", r5.getUid()));
+        var dbR4b = this.store.find(r4.getUid(), Referential.at(daysAgo(4)));
+        var dbR5a = this.store.find(r5.getUid());
 
         Assertions.assertEquals(3, this.store.count(Referential.any()));
         Assertions.assertEquals(1, this.store.count(Referential.now()));
@@ -199,7 +199,7 @@ public class SimpleRecordStoreTest
         var r6Start = daysAgo(2);
         this.store.put(r6, Referential.at(r6Start));
 
-        var dbR6 = this.store.find(new Query("uid", r6.getUid()));
+        var dbR6 = this.store.find(r6.getUid());
 
         Assertions.assertEquals(3, this.store.count(Referential.any()));
         Assertions.assertEquals(1, this.store.count(Referential.now()));
@@ -216,8 +216,8 @@ public class SimpleRecordStoreTest
         var r7Start = daysAgo(4);
         this.store.put(r7, Referential.at(r7Start));
 
-        var dbR5b = this.store.find(new Query("uid", r5.getUid()));
-        var dbR7 = this.store.find(new Query("uid", r7.getUid()));
+        var dbR5b = this.store.find(r5.getUid());
+        var dbR7 = this.store.find(r7.getUid());
 
         Assertions.assertEquals(3, this.store.count(Referential.any()));
         Assertions.assertEquals(1, this.store.count(Referential.now()));
@@ -236,7 +236,7 @@ public class SimpleRecordStoreTest
 
         var dbR1e = this.store.find(new Query("_id", Identifier.from(dbR1a.getId())), Referential.at(daysAgo(7)));
         var dbR5c = this.store.find(new Query("_id", Identifier.from(dbR5b.getId())));
-        var dbR8 = this.store.find(new Query("uid", r8.getUid()));
+        var dbR8 = this.store.find(r8.getUid());
 
         Assertions.assertEquals(2, this.store.count(Referential.any()));
         Assertions.assertEquals(1, this.store.count(Referential.now()));
@@ -259,7 +259,7 @@ public class SimpleRecordStoreTest
         var r1To = daysAgo(3);
         this.store.put(r1, Referential.between(r1From, r1To));
 
-        var dbR1a = this.store.find(new Query("uid", r1.getUid()), Referential.at(r1From));
+        var dbR1a = this.store.find(r1.getUid(), Referential.at(r1From));
 
         Assertions.assertEquals(1, this.store.count(Referential.any()));
         Assertions.assertEquals(0, this.store.count(Referential.now()));
@@ -277,7 +277,7 @@ public class SimpleRecordStoreTest
         var r2To = daysAgo(4);
         this.store.put(r2, Referential.between(r2From, r2To));
 
-        var dbR1b = this.store.find(new Query("uid", r1.getUid()), Referential.at(r2From));
+        var dbR1b = this.store.find(r1.getUid(), Referential.at(r2From));
 
         Assertions.assertEquals(1, this.store.count(Referential.any()));
         Assertions.assertEquals(0, this.store.count(Referential.now()));
@@ -296,7 +296,7 @@ public class SimpleRecordStoreTest
         var r3To = daysAgo(4);
         this.store.put(r3, Referential.between(r3From, r3To));
 
-        var dbR1c = this.store.find(new Query("uid", r1.getUid()), Referential.at(r3From));
+        var dbR1c = this.store.find(r1.getUid(), Referential.at(r3From));
 
         Assertions.assertEquals(1, this.store.count(Referential.any()));
         Assertions.assertEquals(0, this.store.count(Referential.now()));
@@ -317,8 +317,8 @@ public class SimpleRecordStoreTest
         var r4To = daysAgo(2);
         this.store.put(r4, Referential.between(r4From, r4To));
 
-        var dbR1d = this.store.find(new Query("uid", r1.getUid()), Referential.at(daysAgo(6)));
-        var dbR4a = this.store.find(new Query("uid", r4.getUid()), Referential.at(daysAgo(3)));
+        var dbR1d = this.store.find(r1.getUid(), Referential.at(daysAgo(6)));
+        var dbR4a = this.store.find(r4.getUid(), Referential.at(daysAgo(3)));
 
         Assertions.assertEquals(2, this.store.count(Referential.any()));
         Assertions.assertEquals(0, this.store.count(Referential.now()));
@@ -340,8 +340,8 @@ public class SimpleRecordStoreTest
         var r5To = daysAgo(1);
         this.store.put(r5, Referential.between(r5From, r5To));
 
-        var dbR4b = this.store.find(new Query("uid", r4.getUid()), Referential.at(daysAgo(4)));
-        var dbR5a = this.store.find(new Query("uid", r5.getUid()), Referential.at(daysAgo(2)));
+        var dbR4b = this.store.find(r4.getUid(), Referential.at(daysAgo(4)));
+        var dbR5a = this.store.find(r5.getUid(), Referential.at(daysAgo(2)));
 
         Assertions.assertEquals(3, this.store.count(Referential.any()));
         Assertions.assertEquals(0, this.store.count(Referential.now()));
@@ -363,8 +363,8 @@ public class SimpleRecordStoreTest
         var r6To = daysAgo(2);
         this.store.put(r6, Referential.between(r6From, r6To));
 
-        var dbR5b = this.store.find(new Query("uid", r5.getUid()), Referential.at(daysAgo(2)));
-        var dbR6 = this.store.find(new Query("uid", r6.getUid()), Referential.at(daysAgo(3)));
+        var dbR5b = this.store.find(r5.getUid(), Referential.at(daysAgo(2)));
+        var dbR6 = this.store.find(r6.getUid(), Referential.at(daysAgo(3)));
 
         Assertions.assertEquals(3, this.store.count(Referential.any()));
         Assertions.assertEquals(0, this.store.count(Referential.now()));
@@ -388,7 +388,7 @@ public class SimpleRecordStoreTest
 
         var dbR1e = this.store.find(new Query("_id", Identifier.from(dbR1a.getId())), Referential.at(daysAgo(7)));
         var dbR5c = this.store.find(new Query("_id", Identifier.from(dbR5b.getId())), Referential.at(daysAgo(3)));
-        var dbR7 = this.store.find(new Query("uid", r7.getUid()), Referential.at(daysAgo(5)));
+        var dbR7 = this.store.find(r7.getUid(), Referential.at(daysAgo(5)));
 
         Assertions.assertEquals(3, this.store.count(Referential.any()));
         Assertions.assertEquals(0, this.store.count(Referential.now()));
@@ -413,7 +413,7 @@ public class SimpleRecordStoreTest
 
         var dbR1f = this.store.find(new Query("_id", Identifier.from(dbR1a.getId())), Referential.at(daysAgo(7)));
         var dbR5d = this.store.find(new Query("_id", Identifier.from(dbR5b.getId())), Referential.at(daysAgo(1)));
-        var dbR8 = this.store.find(new Query("uid", r7.getUid()), Referential.at(daysAgo(5)));
+        var dbR8 = this.store.find(r7.getUid(), Referential.at(daysAgo(5)));
 
         Assertions.assertEquals(2, this.store.count(Referential.any()));
         Assertions.assertEquals(0, this.store.count(Referential.now()));
@@ -425,6 +425,39 @@ public class SimpleRecordStoreTest
         Assertions.assertEquals(r8From, dbR8.getValidityStart());
         Assertions.assertEquals(r8To, dbR8.getValidityEnd());
         Assertions.assertEquals(dbR1f.getValidityEnd(), dbR8.getValidityStart());
+    }
+
+    @Test
+    void testRemove()
+    {
+        /* We persist a first record, then modify it and persist again */
+        var r1 = provideRecord();
+        this.store.put(r1);
+
+        r1.setName("Meh");
+        this.store.put(r1);
+
+        /* We persist second record, then modify it and persist again */
+        var r2 = provideRecord().setAge(12L);
+        this.store.put(r2);
+
+        r2.setAge(20L);
+        this.store.put(r2);
+
+        /* We should have 2 records, each with 2 versions */
+        Assertions.assertEquals(2, this.store.count());
+        Assertions.assertEquals(4, this.store.count(Referential.any()));
+
+        this.store.remove(new Query("uid", r1.getUid()));
+
+        /* We should have 1 record with 2 versions */
+        Assertions.assertEquals(2, this.store.count(Referential.any()));
+
+        var dbR2 = this.store.find(r2.getUid());
+        this.store.remove(dbR2.getId());
+
+        /* We should have 1 record with 1 version */
+        Assertions.assertEquals(1, this.store.count(Referential.any()));
     }
 
     /**

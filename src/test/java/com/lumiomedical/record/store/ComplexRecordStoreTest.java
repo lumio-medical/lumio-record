@@ -102,7 +102,6 @@ public class ComplexRecordStoreTest
 
         Assertions.assertEquals(5, this.store.count(Referential.any()));
         Assertions.assertEquals(2, this.store.map(new Query()).keySet().size());
-
     }
 
     /**
