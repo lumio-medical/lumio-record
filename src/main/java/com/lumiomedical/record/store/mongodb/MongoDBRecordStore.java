@@ -446,9 +446,10 @@ public abstract class MongoDBRecordStore<R extends Record<R>> extends DefaultMon
     {
         Map<S, T> map = new HashMap<>();
 
-        if (!ids.isEmpty()) {
+        if (!ids.isEmpty())
+        {
             var aggregationResult = this.mongoCollection.aggregate(
-                Arrays.asList(
+                List.of(
                     Aggregates.match(applyReferentialCriteria(Filters.in(source.queryName(), ids), referential)),
                     Aggregates.group("$" + source.queryName(), Accumulators.addToSet("uid", "$uid"))
                 )
